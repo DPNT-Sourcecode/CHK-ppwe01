@@ -1,9 +1,6 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-	if not skus:
-		return -1
-
 	skus_clean=""
 	for elem in skus:
 		if elem.isalpha():
@@ -53,4 +50,5 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
 
