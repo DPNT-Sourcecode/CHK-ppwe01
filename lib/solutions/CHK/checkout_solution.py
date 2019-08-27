@@ -17,8 +17,7 @@ def checkout(skus):
 				for i in range(1,a_occurances+1):
 					if a_occurances%3==0:
 						count+=130
-
-					temp_a_occurances-=1
+						temp_a_occurances-=3
 
 
 		else
@@ -32,5 +31,6 @@ def checkout(skus):
 		count +=20
 
     raise NotImplementedError()
+
 
 
