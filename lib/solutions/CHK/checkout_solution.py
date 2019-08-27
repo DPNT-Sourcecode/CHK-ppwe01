@@ -43,9 +43,9 @@ def checkout(skus):
 		d_amt = 15*d_occurances
 		count +=d_amt
 
-	b_amount_free = 0
 	if 'E' in result:
 		e_price = 40
+		b_amount_free = 0
 		e_occurances = result.count("E")
 		temp_e_occurances =e_occurances
 		for i in range(1,e_occurances+1):
@@ -81,6 +81,38 @@ def checkout(skus):
 		for i in range(temp_b_occurances):
 			count+=30
 
+	f_amount_free = 0
+	if 'F' in result:
+		f_occurances = result.count("F")
+		print(f_occurances)
+		temp_f_occurances = f_occurances
+
+		for i in range(1,f_occurances+1):
+			if temp_f_occurances <2:
+				break
+
+			if i%2==0:
+				f_amount_free+=1
+			temp_f_occurances-=1
+
+
+	print(f"f_amount_free {f_amount_free}")
+
+	f_occurances = result.count("F")
+	if f_occurances >=3:
+		for i in range(1,f_amount_free+1):
+			if 'F' in result:
+				result.remove('F')
+
+	print(result)
+
+
+	if 'F' in result:
+		f_occurances = result.count("F")
+		f_amt = 15*f_occurances
+		count +=f_amt
+
 	return count
 
 	raise NotImplementedError()
+
