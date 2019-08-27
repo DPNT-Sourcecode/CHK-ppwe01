@@ -7,4 +7,3 @@ class TestSum(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout("A,B"), 80)
         self.assertEqual(checkout_solution.checkout("A,B,C"), 100)
 
-
