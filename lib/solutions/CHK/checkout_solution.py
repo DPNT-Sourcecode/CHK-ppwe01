@@ -12,9 +12,15 @@ def checkout(skus):
 				r = a_occurances//3
 				for i in range(r):
 					count+=130
-
 			else:
-				pass
+				temp_a_occurances =a_occurances
+				for i in range(1,a_occurances+1):
+					if a_occurances%3==0:
+						count+=130
+
+					temp_a_occurances-=1
+
+
 		else
 			count += 50
 
@@ -26,4 +32,5 @@ def checkout(skus):
 		count +=20
 
     raise NotImplementedError()
+
 
