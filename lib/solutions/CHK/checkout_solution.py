@@ -16,15 +16,10 @@ def checkout(skus):
 	count = 0
 
 
-
-
 	if 'A' in result:
 		a_occurances = result.count("A")
 		temp_a_occurances =a_occurances
 		for i in range(1,a_occurances+1):
-			#if i%3==0:
-				#count+=130
-				#temp_a_occurances-=3
 			if i%5==0:
 				count+=200
 				temp_a_occurances-=5
@@ -37,18 +32,6 @@ def checkout(skus):
 
 		for i in range(temp_a_occurances2):
 			count+=50
-
-	if 'B' in result:
-		b_occurances = result.count("B")
-		temp_b_occurances =b_occurances
-		for i in range(1,b_occurances+1):
-			if i%2==0:
-				count+=45
-				temp_b_occurances-=2
-
-		for i in range(temp_b_occurances):
-			count+=30
-		
 
 	if 'C' in result:
 		c_occurances = result.count("C")
@@ -74,19 +57,30 @@ def checkout(skus):
 		for i in range(temp_e_occurances):
 			count+=e_price
 
+	check_b_for_discount = result.count("B")
+	if check_b_for_discount:
 		b_discount =0
 		temp_b_amount_free =b_amount_free
 		for i in range(1,b_amount_free+1):
-			if i%2==0:
-				b_discount+=45
-				temp_b_amount_free-=2
-
-		for i in range(temp_b_amount_free):
 			b_discount+=30
+
+	for i in range(1,b_amount_free+1):
+		if 'B' in result:
+			result.remove('B')
 		
-		count = count - b_discount
+
+
+	if 'B' in result:
+		b_occurances = result.count("B")
+		temp_b_occurances =b_occurances
+		for i in range(1,b_occurances+1):
+			if i%2==0:
+				count+=45
+				temp_b_occurances-=2
+
+		for i in range(temp_b_occurances):
+			count+=30
 
 	return count
-
 
 	raise NotImplementedError()
