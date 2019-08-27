@@ -4,7 +4,8 @@ def checkout(skus):
 	skus_clean=""
 	for elem in skus:
 		if elem.isalpha():
-			elem = elem.capitalize()
+			if elem.islower():
+				return -1
 			skus_clean= skus_clean+ elem+','
 		else:
 			return -1
@@ -50,5 +51,6 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
 
 
