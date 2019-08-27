@@ -1,7 +1,12 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+
 	result = [x.strip() for x in skus.split(',')]
+	if all(x.isalpha() for x in result):
+		pass
+	else:
+		return -1
 
 	count = 0
 
@@ -41,6 +46,7 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
 
 
 
