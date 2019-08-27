@@ -17,15 +17,25 @@ def checkout(skus):
 			count+=50
 
 
-		else
-			count += 50
+
 
 
 
 	if 'B' in result:
-		count += 30
+		b_occurances = result.count("B")
+		temp_b_occurances =b_occurances
+		for i in range(1,b_occurances+1):
+			if i%2==0:
+				count+=45
+				temp_b_occurances-=2
+
+		for i in range(temp_b_occurances):
+			count+=30
+		
+		
 	if 'C' in result:
 		count +=20
 
     raise NotImplementedError()
+
 
