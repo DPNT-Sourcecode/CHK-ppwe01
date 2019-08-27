@@ -43,6 +43,7 @@ def checkout(skus):
 		d_amt = 15*d_occurances
 		count +=d_amt
 
+	b_amount_free = 0
 	if 'E' in result:
 		e_price = 40
 		b_amount_free = 0
@@ -115,4 +116,5 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
 
