@@ -62,19 +62,33 @@ def checkout(skus):
 
 	if 'E' in result:
 		e_price = 40
-		b_price = 30
+		b_amount_free = 0
 		e_occurances = result.count("E")
 		temp_e_occurances =e_occurances
 		for i in range(1,e_occurances+1):
 			if i%2==0:
 				count+=(e_price*2)
+				b_amount_free+=1
 				temp_e_occurances-=2
 
 		for i in range(temp_e_occurances):
 			count+=e_price
 
+		b_discount =0
+		temp_b_amount_free =b_amount_free
+		for i in range(1,b_amount_free+1):
+			if i%2==0:
+				b_discount+=45
+				temp_b_amount_free-=2
+
+		for i in range(temp_b_amount_free):
+			b_discount+=30
+		
+		count = count - b_discount
+
 	return count
 
 
 	raise NotImplementedError()
+
 
