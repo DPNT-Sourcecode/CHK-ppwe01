@@ -67,7 +67,7 @@ def checkout(skus):
 		temp_e_occurances =e_occurances
 		for i in range(1,e_occurances+1):
 			if i%2==0:
-				count+=((e_price*2)+b_price)
+				count+=(e_price*2)
 				temp_e_occurances-=2
 
 		for i in range(temp_e_occurances):
@@ -77,3 +77,4 @@ def checkout(skus):
 
 
 	raise NotImplementedError()
+
