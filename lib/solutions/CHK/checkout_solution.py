@@ -16,11 +16,6 @@ def checkout(skus):
 		for i in range(temp_a_occurances):
 			count+=50
 
-
-
-
-
-
 	if 'B' in result:
 		b_occurances = result.count("B")
 		temp_b_occurances =b_occurances
@@ -34,12 +29,19 @@ def checkout(skus):
 		
 
 	if 'C' in result:
-		count +=20
+		c_occurances = result.count("C")
+		c_amt = 20*c_occurances
+		count +=c_amt
 
 	if 'D' in result:
-		count +=20
+		d_occurances = result.count("D")
+		d_amt = 15*d_occurances
+		count +=d_amt
 
-    raise NotImplementedError()
+	return count
+
+	raise NotImplementedError()
+
 
 
 
