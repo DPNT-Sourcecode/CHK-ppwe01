@@ -32,10 +32,14 @@ def checkout(skus):
 		for i in range(temp_b_occurances):
 			count+=30
 		
-		
+
 	if 'C' in result:
 		count +=20
 
+	if 'D' in result:
+		count +=20
+
     raise NotImplementedError()
+
 
 
