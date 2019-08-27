@@ -51,6 +51,3 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
-
-
-
