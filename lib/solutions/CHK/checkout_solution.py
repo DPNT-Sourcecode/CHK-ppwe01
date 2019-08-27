@@ -110,11 +110,12 @@ def checkout(skus):
 
 	if 'F' in result:
 		f_occurances = result.count("F")
-		f_amt = 15*f_occurances
+		f_amt = 10*f_occurances
 		count +=f_amt
 
 	return count
 
 	raise NotImplementedError()
+
 
 
