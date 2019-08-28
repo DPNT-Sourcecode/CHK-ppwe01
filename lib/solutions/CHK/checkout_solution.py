@@ -433,6 +433,8 @@ discount_skus = ['A','B','E','F','H','K','N','P','Q','R','U','V']
 
 
 def checkout(skus):
+	if not skus:
+		return -1
 	skus_clean=""
 	for elem in skus:
 		if elem.isalpha():
@@ -489,5 +491,6 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
 
 
