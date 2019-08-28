@@ -316,7 +316,7 @@ def discount_R(just_price=False, result=None):
 	#print("\n for i in range(1,r_occurances+1):")
 	for i in range(1,r_occurances+1):
 		if i%3==0:
-			print(f"i%3==0: {i%3==0}")
+			#print(f"i%3==0: {i%3==0}")
 			count+=(r_price*3)
 			q_amount_free+=1
 			temp_r_occurances-=3
@@ -495,7 +495,7 @@ def checkout(skus):
 			if waiting == True:
 				#print("waiting  "+elem)
 				continue
-			#discount +=available_skus[elem](result=result)
+			discount +=available_skus[elem](result=result)
 			discount = waiting
 			discount_skus_copy.remove(elem)
 
@@ -512,3 +512,4 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
