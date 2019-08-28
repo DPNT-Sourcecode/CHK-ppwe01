@@ -464,13 +464,17 @@ def checkout(skus):
 		#result_copy = result.copy()
 		result_copy = []
 		n_occurances = result.count("N")
-		m_occurances = result.count("N")
+		m_occurances = result.count("M")
+		#for elem in result:
+		for i in range(n_occurances):
+			#if elem == 'M':
+			result_copy.append('N')
+			#elif elem == 'N':
+		for i in range(m_occurances):
+			result_copy.append('M')
+
 		for elem in result:
-			if elem == 'M':
-				result_copy.append('N')
-			elif elem == 'N':
-				result_copy.append('M')
-			else:
+			if elem != 'M' and elem != 'N':
 				result_copy.append(elem)
 
 		result = result_copy.copy()
@@ -508,4 +512,5 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
 
