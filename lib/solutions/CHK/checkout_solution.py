@@ -172,7 +172,6 @@ def discount_H(just_price=False, result=None):
 
 
 
-
 def discount_K(just_price=False, result=None):
 	#print("K")
 	if just_price:
@@ -490,4 +489,5 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
 
