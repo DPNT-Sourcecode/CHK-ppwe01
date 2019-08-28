@@ -410,8 +410,6 @@ def discount_V(just_price=False, result=None):
 	return discount
 
 
-
-
 def getTotalBeforeDiscount(result):
 	total_price_without_discount =0
 	for elem in result:
@@ -466,7 +464,6 @@ def checkout(skus):
 
 		#print(f"result if m and n present {result_copy}")
 
-
 	total_price_without_discount = getTotalBeforeDiscount(result)
 	discount =0
 	discount_skus_copy = discount_skus.copy()
@@ -493,3 +490,4 @@ def checkout(skus):
 	return count
 
 	raise NotImplementedError()
+
