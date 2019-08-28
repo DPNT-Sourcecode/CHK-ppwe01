@@ -172,6 +172,7 @@ def discount_H(just_price=False, result=None):
 
 
 
+
 def discount_K(just_price=False, result=None):
 	#print("K")
 	if just_price:
@@ -342,8 +343,10 @@ def discount_R(just_price=False, result=None):
 
 
 
-def discount_U(just_price=False, result=None):
+def discount_U(just_price=False, result=None, waiting=False):
+
 	if just_price:
+		#print(f"just_price {just_price}")
 		return 40
 
 	#print(f'discount_U - result: {result}')
@@ -369,11 +372,18 @@ def discount_U(just_price=False, result=None):
 				result.remove('U')
 
 	if 'U' in result:
+		#print(f"if 'U' in result:{'U' in result}")
 		u_occurances = result.count("U")
+		#print(f"u_occurances {u_occurances}")
+
 		u_amt = 40*u_occurances
 		count +=u_amt
 
+	#print(f"price {count}")
+	#print(f"discount {price -count}")
 	return price - count
+
+
 
 
 
@@ -407,6 +417,8 @@ def discount_V(just_price=False, result=None):
 	#print(f"count {count}")
 	discount = price - count
 	return discount
+
+
 
 
 def getTotalBeforeDiscount(result):
@@ -465,17 +477,22 @@ def checkout(skus):
 
 		#print(f"result if m and n present {result_copy}")
 
+	#print(f"\n ------------checkout-----------")
 	total_price_without_discount = getTotalBeforeDiscount(result)
+	#print(f"total_price_without_discount {total_price_without_discount}")
 	discount =0
 	discount_skus_copy = discount_skus.copy()
 	for elem in result:
 		#print(f"discount_skus_copy {discount_skus_copy}")
 		if elem in discount_skus_copy:
+			#print(f"elem {elem}")
 			waiting = available_skus[elem](result=result)
+			#print(f" waiting {waiting}")
 			if waiting == True:
 				#print("waiting  "+elem)
 				continue
-			discount +=available_skus[elem](result=result)
+			#discount +=available_skus[elem](result=result)
+			discount = waiting
 			discount_skus_copy.remove(elem)
 
 	for elem in result:
@@ -484,10 +501,11 @@ def checkout(skus):
 			discount +=available_skus[elem](result=result, waiting=False)
 			discount_skus_copy.remove(elem)
 
-
+	#print(f'returned discount {discount}')
 	#print(f"price after discount {total_price_without_discount-discount}")
 	count = total_price_without_discount-discount
 	#print(result)
 	return count
 
 	raise NotImplementedError()
+
