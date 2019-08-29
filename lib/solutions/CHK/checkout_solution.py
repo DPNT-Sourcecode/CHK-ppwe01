@@ -1,5 +1,3 @@
-# noinspection PyUnusedLocal
-# skus = unicode string
 from collections import Counter
 
 
@@ -11,19 +9,64 @@ offers = {'A': {1:50, 3:130, 5:200}, 'B': {1:30, 2:45}, 'C': {1:20}, 'D':{1:15},
           'V': {1:50, 2:90, 3:130}, 'W': {1:20}, 'X': {1:90}, 'Y': {1:10}, 'Z': {1:50}}
 
 
-def checkout(skus):
+def difference(a, b):
+    countA = Counter(a)
+    countB = Counter(b)
+    countC = {}
+
+    for prod, n in countA.items():
+        try:
+            m = countB[prod]
+            countC[prod] = n-m
+        except KeyError:
+            countC[prod] = n
+
+    return countC
+
+
+def checkout(sku):
 
     products = list(offers.keys())
 
     # catching invalid input
-    if not set(list(skus)) <= set(products):
+    if not set(list(sku)) <= set(products):
         return -1
 
+    # the items that are for free
+    count = Counter(sku)
+    free = ''
+
+    #managing the free items first
+    for product, n in count.items():
+        
+        keys = list(offers[product].keys())
+
+        # sorting the offers from higher to lower
+        keys = sorted(keys, key=lambda x: -x)
+
+        for key in keys:
+
+            # number of times that offer <key> fits in <n>
+            m = n // key
+
+            offer = offers[product][key]
+
+            # if the offer is a discount
+            if type(offer) == str:
+                free += m * offer
+
+                # updating the number of items left
+                n -= m * key
+
+            if n == 0:
+                break
+
+    # the items to pay
+    unfree = difference(sku, free)
     price = 0
-    count = Counter(skus)
 
     # get the product and its number of appearances
-    for product, n in count.items():
+    for product, n in unfree.items():
 
         keys = list(offers[product].keys())
 
@@ -48,7 +91,3 @@ def checkout(skus):
                 break
 
     return price
-
-    raise NotImplementedError()
-
-
