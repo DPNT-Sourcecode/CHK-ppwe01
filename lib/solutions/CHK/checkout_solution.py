@@ -16,11 +16,11 @@ def checkout(skus):
     products = list(offers.keys())
 
     # catching invalid input
-    if not set(list(sku)) <= set(products):
+    if not set(list(skus)) <= set(products):
         return -1
 
     price = 0
-    count = Counter(sku)
+    count = Counter(skus)
 
     # get the product and its number of appearances
     for product, n in count.items():
@@ -50,4 +50,5 @@ def checkout(skus):
     return price
 
     raise NotImplementedError()
+
 
