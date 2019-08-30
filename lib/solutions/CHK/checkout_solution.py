@@ -5,8 +5,8 @@ offers = {'A': {1:50, 3:130, 5:200}, 'B': {1:30, 2:45}, 'C': {1:20}, 'D':{1:15},
           'E': {1:40, 2:'B'}, 'F': {1:10, 2:'F'}, 'G': {1:20}, 'H': {1:10, 5:45, 10:80},
           'I': {1:35}, 'J': {1:60}, 'K': {1:80, 2:150}, 'L': {1:90}, 'M': {1:15},
           'N': {1:40, 3:'M'}, 'O': {1:10}, 'P': {1:50, 5:200}, 'Q': {1:30, 3:80},
-          'R': {1:50, 3:'Q'}, 'S': {1:30}, 'T': {1:20}, 'U': {1:40, 3:'U'},
-          'V': {1:50, 2:90, 3:130}, 'W': {1:20}, 'X': {1:90}, 'Y': {1:10}, 'Z': {1:50}}
+          'R': {1:50, 3:'Q'}, 'S': {1:20}, 'T': {1:20}, 'U': {1:40, 3:'U'},
+          'V': {1:50, 2:90, 3:130}, 'W': {1:20}, 'X': {1:17}, 'Y': {1:20}, 'Z': {1:21}}
 
 
 def difference(a, b):
@@ -27,16 +27,59 @@ def difference(a, b):
 def checkout(sku):
 
     products = list(offers.keys())
+    price = 0
 
     # catching invalid input
     if not set(list(sku)) <= set(products):
         return -1
 
+    # 1. Managing group offers
+    # items from most expansive to cheapest
+    group = ['Z', 'T', 'S', 'Y', 'X']
+    groupOffer = [x for x in list(sku) if x in group]
+
+    # sorting group offer according to the order in group
+    groupOffer = sorted(groupOffer, key=lambda x: group.index(x))
+
+    # check if there are at least three different items
+    if len(set(groupOffer)) > 2:
+
+        # count the number of each item
+        countG = Counter(groupOffer)
+
+        # resorting groupOffer according to repetition and removing duplicates
+        groupOffer = sorted(groupOffer, key=lambda x: -countG[x])
+        groupOffer = list(dict.fromkeys(groupOffer))
+
+        while True:
+            deleted = []
+
+            for item in groupOffer:
+
+                # make sure we only take 3 items from there
+                if len(deleted) == 3:
+                    break
+
+                if item in sku:
+                    indx = sku.index(item)
+                    # adding the item to the delete list
+                    deleted.append(indx)
+
+            deleted = sorted(deleted, key=lambda x: -x)
+
+            if len(deleted) == 3:
+                for indx in deleted:
+                    sku = sku[:indx] + sku[indx+1:]
+                price += 45
+
+            else:
+                break
+
+    # 2. Managing the free items first
     # the items that are for free
     count = Counter(sku)
     free = ''
 
-    # managing the free items first
     for product, n in count.items():
 
         keys = list(offers[product].keys())
@@ -72,7 +115,6 @@ def checkout(sku):
 
     # the items to pay
     unfree = difference(sku, free)
-    price = 0
 
     # get the product and its number of appearances
     for product, n in unfree.items():
