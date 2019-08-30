@@ -36,9 +36,9 @@ def checkout(sku):
     count = Counter(sku)
     free = ''
 
-    #managing the free items first
+    # managing the free items first
     for product, n in count.items():
-        
+
         keys = list(offers[product].keys())
 
         # sorting the offers from higher to lower
@@ -46,17 +46,26 @@ def checkout(sku):
 
         for key in keys:
 
-            # number of times that offer <key> fits in <n>
-            m = n // key
+            while n // key > 0:
+                # number of times that offer <key> fits in <n>
 
-            offer = offers[product][key]
+                offer = offers[product][key]
 
-            # if the offer is a discount
-            if type(offer) == str:
-                free += m * offer
+                # if the free product is the same product, check that there are
+                # at least one more in the list before removing it
+                if product == offer:
+                    # if the offer is a free product
+                    if type(offer) == str and n > key:
+                        free += offer
+
+                # if the products are difference, add it to the free list directly
+                else:
+                    # if the offer is a free product
+                    if type(offer) == str:
+                        free += offer
 
                 # updating the number of items left
-                n -= m * key
+                n -= key
 
             if n == 0:
                 break
