@@ -41,39 +41,35 @@ def checkout(sku):
     # sorting group offer according to the order in group
     groupOffer = sorted(groupOffer, key=lambda x: group.index(x))
 
-    # check if there are at least three different items
-    if len(set(groupOffer)) > 2:
+    # count the number of each item
+    countG = Counter(groupOffer)
 
-        # count the number of each item
-        countG = Counter(groupOffer)
+    # resorting groupOffer according to repetition and removing duplicates
+    groupOffer = sorted(groupOffer, key=lambda x: -countG[x])
 
-        # resorting groupOffer according to repetition and removing duplicates
-        groupOffer = sorted(groupOffer, key=lambda x: -countG[x])
-        groupOffer = list(dict.fromkeys(groupOffer))
+    while True:
+        deleted = []
 
-        while True:
-            deleted = []
+        for item in groupOffer:
 
-            for item in groupOffer:
-
-                # make sure we only take 3 items from there
-                if len(deleted) == 3:
-                    break
-
-                if item in sku:
-                    indx = sku.index(item)
-                    # adding the item to the delete list
-                    deleted.append(indx)
-
-            deleted = sorted(deleted, key=lambda x: -x)
-
+            # make sure we only take 3 items from there
             if len(deleted) == 3:
-                for indx in deleted:
-                    sku = sku[:indx] + sku[indx+1:]
-                price += 45
-
-            else:
                 break
+
+            if item in sku:
+                indx = sku.index(item)
+                # adding the item to the delete list
+                deleted.append(indx)
+
+        deleted = sorted(deleted, key=lambda x: -x)
+
+        if len(deleted) == 3:
+            for indx in deleted:
+                sku = sku[:indx] + sku[indx+1:]
+            price += 45
+
+        else:
+            break
 
     # 2. Managing the free items first
     # the items that are for free
